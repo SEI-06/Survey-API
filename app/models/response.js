@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const responseSchema = new mongoose.Schema({
   choice: {
-    type: Number,
+    type: String,
     required: true
   },
   owner: {
