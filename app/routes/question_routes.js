@@ -1,3 +1,4 @@
+
 // Express docs: http://expressjs.com/en/api.html
 const express = require('express')
 // Passport docs: http://www.passportjs.org/docs/
@@ -31,6 +32,7 @@ const router = express.Router()
 // GET /questions
 router.get('/questions', requireToken, (req, res, next) => {
   Question.find()
+    .populate('owner', 'email')
     .then(questions => {
       // `questions` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
