@@ -1,7 +1,7 @@
 #!/bin/bash
 
 API="http://localhost:4741"
-URL_PATH="/responses"
+URL_PATH="/responses/${QOWNER}"
 
 curl "${API}${URL_PATH}" \
   --include \

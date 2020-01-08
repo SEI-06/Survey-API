@@ -26,11 +26,7 @@ const questionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  },
-  responses: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Response'
-  }]
+  }
 }, {
   timestamps: true
 })

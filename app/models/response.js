@@ -2,12 +2,17 @@ const mongoose = require('mongoose')
 
 const responseSchema = new mongoose.Schema({
   choice: {
-    type: String,
+    type: Number,
     required: true
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true
+  },
+  questionOwner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Question',
     required: true
   }
 }, {
