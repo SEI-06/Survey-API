@@ -1,4 +1,3 @@
-
 // Express docs: http://expressjs.com/en/api.html
 const express = require('express')
 // Passport docs: http://www.passportjs.org/docs/
@@ -50,6 +49,7 @@ router.get('/questions', requireToken, (req, res, next) => {
 router.get('/questions/:id', requireToken, (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
   Question.findById(req.params.id)
+    .populate('owner', 'email')
     .then(handle404)
     // if `findById` is succesful, respond with 200 and "question" JSON
     .then(question => res.status(200).json({ question: question.toObject() }))
