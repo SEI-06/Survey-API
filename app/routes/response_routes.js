@@ -5,6 +5,7 @@ const passport = require('passport')
 
 // pull in Mongoose model for responses
 const Response = require('../models/response')
+
 // const Question = require('../models/question')
 
 // this is a collection of methods that help us detect situations when we need
@@ -32,6 +33,8 @@ const router = express.Router()
 // GET /responses
 router.get('/responses', requireToken, (req, res, next) => {
   Response.find()
+    .populate('owner')
+    .populate('questionOwner')
     .then(responses => {
       // `responses` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -68,6 +71,10 @@ router.post('/responses/:questionId', requireToken, (req, res, next) => {
     .then(response => {
       res.status(201).json({ response: response.toObject() })
     })
+    // .then(() => {
+    //   return Question.findOne(req.body.response.questionOwner).populate('responses')
+    // })
+    // .then(Response.save())
     .catch(next)
 })
 
