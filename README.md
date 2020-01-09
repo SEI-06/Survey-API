@@ -1,202 +1,118 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+# Survey Application
 
-# express-api-template
+A survey SPA.
 
-A template for starting projects with `express` as an API. Includes
-authentication and common middlewares.
+## The Application
 
-## Installation
+This SPA is a survey application that can be used to create custom surveys. A user
+can perform basic authentication actions, such as sign in/sign up/change password/
+sign out. Once signed in, from the main view, the user can create a new survey,
+which will have a title (question) and four answers to the survey question. The user
+can also get all surveys, which will show surveys that all users have created. When
+viewing surveys, the user has multiple options: they can see the results of a
+given survey (which will show how many users chose each answer), they can update
+and delete surveys (which will only allow the user to update/delete surveys) they
+have created, and can show details of a survey (such as who made it). From the menu,
+a user can see only surveys they have created, as well as take a survey. In taking
+a survey, a user can choose out of the available surveys. Each survey is multiple
+choice, so the user can select one answer, and hit submit, thus making the results
+viewable.
 
-1. [Download](../../archive/master.zip) this template.
-1. Move the .zip file to your `sei/projects/` directory and Unzip it (creating a
-   folder) -- **NOTE:** if the folder was already unzipped, use the `mv` command
-   line to move it to the `sei/projects/` directory.
-1. Rename the directory from express-api-template -> your-app-name.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Move into the new project and `git init`.
-1. Replace all instances of `'express-api-template'` with your app name.
-1. Install dependencies with `npm install`.
-1. Ensure that you have `nodemon` installed by running `npm install -g nodemon`.
-1. Ensure the API is functioning properly by running `npm run server`.
-1. Once everything is working, make an initial commit.
-1. Follow the steps in [express-api-deployment-guide](https://git.generalassemb.ly/ga-wdi-boston/express-api-deployment-guide)
+[Link to Client Repo](https://github.com/SEI-06/Survey-Client)
+[Link to deployed Client](https://sei-06.github.io/Survey-Client/)
+[Link to deployed API](https://morning-reef-04926.herokuapp.com)
 
-## Structure
 
-Dependencies are stored in [`package.json`](package.json).
+## Background
 
-The most important file for understanding the structure of the template is
-`server.js`. This is where the actual Express `app` object is created, where
-the middlewares and routes are registered, and more. To register a routefile,
-follow the pattern established here with `exampleRoutes` and `userRoutes`. If
-you want to add any middlewares to your app, do that here.
+### The Planning
 
-The `app` directory contains models and route files. Models are simply Mongoose
-models. To create your own, follow the patterns established in
-`app/models/example.js`. Route files are somewhat similar to controllers in
-Rails, but they cover more functionality, including serialization and deciding
-which HTTP verbs to accept and what to do with them.
+We started off by utilizing our user stories (below), and using them to create our
+wireframes and ERD. Keeping the goal of MVP in mind, we kept our wireframes and
+ERD simple, sticking to our user stories, and the scope of the project.
 
-The `config` directory holds just `db.js`, which is where you specify the name
-and URL of your database.
+As this was a team project, we had four of us to split the work between. So in
+our initial planning, we divvied up the work, planned out who would work on the
+first steps of the application.
 
-The `lib` directory is for code that will be used in other places in the
-application. The token authentication code is stored in `lib/auth.js`. The
-other files in `lib` deal with error handling. `custom_errors.js` is where all
-the different custom classes of errors are created. If you need some other kind
-of error message, you can add it here. There are also some functions defined
-here that are used elsewhere to check for errors. `lib/error_handler.js` is a
-function that will be used in all your `.catch`es. It catches errors, and sets
-the response status code based on what type of error got thrown.
 
-You probably will only need to interact with files in `app/models`,
-`app/routes`, and `server.js`. You'll need to edit `db/config.js` just once,
-to change the name of your app.
 
-## Tasks
+#### User Stories:
 
-Instead of `grunt`, this template uses `npm` as a task runner. This is more
-conventional for modern Express apps, and it's handy because we'll definitely
-use `npm` anyway. These are the commands available:
-
-| Command                | Effect                                                                                                      |
-|------------------------|-------------------------------------------------------------------------------------------------------------|
-| `npm run server`       | Starts a development server with `nodemon` that automatically refreshes when you change something.                                                                                         |
-| `npm test`             | Runs automated tests.                                                                                       |
-| `npm run debug-server` | Starts the server in debug mode, which will print lots of extra info about what's happening inside the app. |
-
-## API
-
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
-
-Scripts are included in [`curl-scripts`](curl-scripts) to test built-in actions.
-Add your own scripts to test your custom API.
-
-### Authentication
-
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/` | `users#changepw`  |
-| DELETE | `/sign-out/`        | `users#signout`   |
-
-#### POST /sign-up
-
-Request:
-
-```sh
-curl --include --request POST http://localhost:4741/sign-up \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password",
-      "password_confirmation": "an example password"
-    }
-  }'
+```
+As an unregistered user, I would like to sign up with email and password.
+As a registered user, I would like to sign in with email and password.
+As a signed in user, I would like to change password.
+As a signed in user, I would like to sign out.
+As a signed in user, I would like to create a survey with a title and possible answers.
+As a signed in user, I would like to update my survey's title and possible answers of a survey.
+As a signed in user, I would like to delete my survey.
+As a signed in user, I would like to see all surveys and its answers.
+As a signed in user, I would like to take a survey.
 ```
 
-```sh
-curl-scripts/sign-up.sh
-```
+#### ERD
 
-Response:
+[ERD](https://imgur.com/a/BTW9TxU)
 
-```md
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
+### The Process & Problem Solving
 
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email"
-  }
-}
-```
+We split into teams of two, and would tackle the tasks for the day. This could be
+as technically complex as building the backend in mongoDB or as creative as styling
+modals. Depending on the scope of the task, we would often peer program, with one
+person typing code on their laptop while the other would find and scan useful resources
+like documentation. When hit with a particularly hard problem, we were able to talk
+it out together and individually research and test different solutions.
 
-#### POST /sign-in
+Some of the more challenging aspects were writing the structure needed to get a
+unique users surveys and connecting user questions to responses. Using regularly
+planned scrums (usually one before moring, one after lunch) we were able to see
+where we were at and readjust our goals accordingly. While we faced regular challenges,
+we had a diverse knowlage of skills that allowed us to share our stregnths.
 
-Request:
 
-```sh
-curl --include --request POST http://localhost:4741/sign-in \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password"
-    }
-  }'
-```
 
-```sh
-curl-scripts/sign-in.sh
-```
+### Remaining Unsolved Problems
 
-Response:
+In future iterations, we would:
 
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
+- Add an "options" resource so a user can control how many answers to their survey
+  they want available
+-
 
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email",
-    "token": "33ad6372f795694b333ec5f329ebeaaa"
-  }
-}
-```
 
-#### PATCH /change-password/
+### API Routes
 
-Request:
+| Verb   | URI Pattern  |
+|:-------|:-------------|
+| POST   | `/sign-up`      |
+| POST   | `/sign-in`      |
+| PATCH  | `/change-password`|
+| DELETE | `/sign-out`     |
+| GET    | `/responses`    |
+| POST   | `/responses/:questionId` |
+| DELETE | `/responses/:id`|
+| GET    | `/questions`    |
+| GET    | `/questions/:id`|
+| POST   | `/questions`    |
+| PATCH  | `/questions/:id`|
+| DELETE | `/questions/:id`|
+| GET    | `/mysurvey/:id` |
 
-```sh
-curl --include --request PATCH http://localhost:4741/change-password/ \
-  --header "Authorization: Token token=$TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "passwords": {
-      "old": "an example password",
-      "new": "super sekrit"
-    }
-  }'
-```
+### Technologies Used
 
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa curl-scripts/change-password.sh
-```
+1. Express
+2. MongoDB
+3. Mongoose
+2. JavaScript
+3. jQuery
+4. AJAX
+6. Handlebars
+7. HTML
+8. CSS
+9. Bootstrap
 
-Response:
 
-```md
-HTTP/1.1 204 No Content
-```
-
-#### DELETE /sign-out/
-
-Request:
-
-```sh
-curl --include --request DELETE http://localhost:4741/sign-out/ \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa curl-scripts/sign-out.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-## [License](LICENSE)
 
 1. All content is licensed under a CC­BY­NC­SA 4.0 license.
 1. All software code is licensed under GNU GPLv3. For commercial use or

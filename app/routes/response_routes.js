@@ -20,7 +20,7 @@ const requireOwnership = customErrors.requireOwnership
 
 // this is middleware that will remove blank fields from `req.body`, e.g.
 // { response: { title: '', text: 'foo' } } -> { response: { text: 'foo' } }
-const removeBlanks = require('../../lib/remove_blank_fields')
+// const removeBlanks = require('../../lib/remove_blank_fields')
 // passing this as a second argument to `router.<verb>` will make it
 // so that a token MUST be passed for that route to be available
 // it will also set `req.user`
@@ -47,17 +47,17 @@ router.get('/responses', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-// SHOW
-// GET /responses/5a7db6c74d55bc51bdf39793
-router.get('/responses/:id', requireToken, (req, res, next) => {
-  // req.params.id will be set based on the `:id` in the route
-  Response.findById(req.params.id)
-    .then(handle404)
-    // if `findById` is succesful, respond with 200 and "response" JSON
-    .then(response => res.status(200).json({ response: response.toObject() }))
-    // if an error occurs, pass it to the handler
-    .catch(next)
-})
+// // SHOW
+// // GET /responses/5a7db6c74d55bc51bdf39793
+// router.get('/responses/:id', requireToken, (req, res, next) => {
+//   // req.params.id will be set based on the `:id` in the route
+//   Response.findById(req.params.id)
+//     .then(handle404)
+//     // if `findById` is succesful, respond with 200 and "response" JSON
+//     .then(response => res.status(200).json({ response: response.toObject() }))
+//     // if an error occurs, pass it to the handler
+//     .catch(next)
+// })
 
 // CREATE
 // POST /responses
@@ -78,28 +78,28 @@ router.post('/responses/:questionId', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-// UPDATE
-// PATCH /responses/5a7db6c74d55bc51bdf39793
-router.patch('/responses/:id', requireToken, removeBlanks, (req, res, next) => {
-  // if the client attempts to change the `owner` property by including a new
-  // owner, prevent that by deleting that key/value pair
-  delete req.body.response.owner
-
-  Response.findById(req.params.id)
-    .then(handle404)
-    .then(response => {
-      // pass the `req` object and the Mongoose record to `requireOwnership`
-      // it will throw an error if the current user isn't the owner
-      requireOwnership(req, response)
-
-      // pass the result of Mongoose's `.update` to the next `.then`
-      return response.updateOne(req.body.response)
-    })
-    // if that succeeded, return 204 and no JSON
-    .then(() => res.sendStatus(204))
-    // if an error occurs, pass it to the handler
-    .catch(next)
-})
+// // UPDATE
+// // PATCH /responses/5a7db6c74d55bc51bdf39793
+// router.patch('/responses/:id', requireToken, removeBlanks, (req, res, next) => {
+//   // if the client attempts to change the `owner` property by including a new
+//   // owner, prevent that by deleting that key/value pair
+//   delete req.body.response.owner
+//
+//   Response.findById(req.params.id)
+//     .then(handle404)
+//     .then(response => {
+//       // pass the `req` object and the Mongoose record to `requireOwnership`
+//       // it will throw an error if the current user isn't the owner
+//       requireOwnership(req, response)
+//
+//       // pass the result of Mongoose's `.update` to the next `.then`
+//       return response.updateOne(req.body.response)
+//     })
+//     // if that succeeded, return 204 and no JSON
+//     .then(() => res.sendStatus(204))
+//     // if an error occurs, pass it to the handler
+//     .catch(next)
+// })
 
 // DESTROY
 // DELETE /responses/5a7db6c74d55bc51bdf39793
