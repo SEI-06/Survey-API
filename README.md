@@ -90,9 +90,7 @@ In future iterations, we would:
 | PATCH  | `/change-password`|
 | DELETE | `/sign-out`     |
 | GET    | `/responses`    |
-| GET    | `/responses/:id`|
 | POST   | `/responses/:questionId` |
-| PATCH  | `/responses/:id`|
 | DELETE | `/responses/:id`|
 | GET    | `/questions`    |
 | GET    | `/questions/:id`|
