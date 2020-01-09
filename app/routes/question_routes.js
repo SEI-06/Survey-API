@@ -57,6 +57,22 @@ router.get('/questions/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+// SHOW
+// GET /questions/5a7db6c74d55bc51bdf39793
+router.get('/mysurvey/:id', requireToken, (req, res, next) => {
+  // req.params.id will be set based on the `:id` in the route
+  const userId = req.user._id
+  Question.find({ owner: userId })
+    .then(question => {
+      return question.map(question => question.toObject())
+    })
+    .then(handle404)
+    .then(questions => res.status(200).json({ questions: questions }))
+
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
 // CREATE
 // POST /questions
 router.post('/questions', requireToken, (req, res, next) => {
