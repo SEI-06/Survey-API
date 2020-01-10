@@ -1,4 +1,4 @@
-# Survey Application
+# Poll-ar Bear
 
 A survey SPA.
 
@@ -78,7 +78,11 @@ In future iterations, we would:
 
 - Add an "options" resource so a user can control how many answers to their survey
   they want available
--
+- Add a chart for results
+- Edit so "delete" and "update" are only available for surveys belonging to the
+  signed in user
+- Multi choice surveys
+- Edit the layout to make more user friendly
 
 
 ### API Routes
@@ -104,13 +108,13 @@ In future iterations, we would:
 1. Express
 2. MongoDB
 3. Mongoose
-2. JavaScript
-3. jQuery
-4. AJAX
-6. Handlebars
-7. HTML
-8. CSS
-9. Bootstrap
+4. JavaScript
+5. jQuery
+6. AJAX
+7. Handlebars
+8. HTML
+9. CSS
+10. Bootstrap
 
 
 
